@@ -13,8 +13,8 @@ namespace WithoutJoinEntity.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=EFDemoWithoutJoinEntity;Trusted_Connection=True;")
-                .LogTo(Console.WriteLine);
+            var userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            optionsBuilder.UseSqlite($"Data Source={userPath}/ManyToManyWithoutJoinEntity.db;");
         }
 
     }

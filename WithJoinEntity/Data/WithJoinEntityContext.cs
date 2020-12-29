@@ -14,12 +14,14 @@ namespace WithJoinEntity.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReaderBook>().HasKey(e => new { e.BookId, e.ReaderId });
+
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=EFDemoWithJoinEntity;Trusted_Connection=True;")
-                .LogTo(Console.WriteLine);
+            var userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            optionsBuilder.UseSqlite($"Data Source={userPath}/ManyToManyWithJoinEntity.db;");
         }
 
     }
